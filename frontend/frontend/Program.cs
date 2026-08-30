@@ -1,5 +1,7 @@
 ﻿using GeometricFigures.Backend;
 using System.Collections.Generic;
+using System.Drawing;
+using Rectangle = GeometricFigures.Backend.Rectangle;
 
 var circle = new Circle(name: nameof(Circle), r: 5);
 var square = new Square(name: nameof(Square), a: 10);
