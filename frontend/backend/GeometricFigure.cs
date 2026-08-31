@@ -16,8 +16,8 @@ namespace GeometricFigures.Backend
 
         public override string ToString()
         {
-            // Formato exacto pedido: "Nombre => Area...... 123.45678 Perimiter: 123.45678"
-            // Se usa CultureInfo en-US para que aparezca coma como separador de miles cuando corresponda
+            // Exact format requested: "Name => Area...... 123.45678 Perimeter: 123.45678"
+            // CultureInfo en-US is used so that a comma appears as the thousands separator where appropriate.
             CultureInfo us = CultureInfo.GetCultureInfo("en-US");
             string areaStr = GetArea().ToString("N5", us);
             string perimStr = GetPerimeter().ToString("N5", us);
