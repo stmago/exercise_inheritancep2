@@ -4,15 +4,46 @@ namespace GeometricFigures.Backend
 {
     public class Square : GeometricFigure
     {
-        public double Side { get; }
+        private double _a;
+        private double _d; 
+
+        public double A
+        {
+            get => _a;
+            set
+            {
+                ValidateA(value);
+                _a = value;
+            }
+        }
+
+        public double D
+        {
+            get => _d;
+            set
+            {
+                ValidateD(value);
+                _d = value;
+            }
+        }
 
         public Square(string name, double a) : base(name)
         {
-            if (a <= 0) throw new ArgumentException("Side must be positive.");
-            Side = a;
+            A = a;
+            D = 0; // valor por defecto, no se usa
         }
 
-        public override double GetArea() => Side * Side;
-        public override double GetPerimeter() => 4 * Side;
+        public void ValidateA(double value)
+        {
+            if (value <= 0) throw new ArgumentException("Side A must be positive.");
+        }
+
+        public void ValidateD(double value)
+        {
+            if (value < 0) throw new ArgumentException("D must be non-negative.");
+        }
+
+        public override double GetArea() => A * A;
+        public override double GetPerimeter() => 4 * A;
     }
 }

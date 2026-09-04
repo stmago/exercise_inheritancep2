@@ -2,23 +2,48 @@
 
 namespace GeometricFigures.Backend
 {
-    public class Rhombus : GeometricFigure
+    public class Rhombus : Square
     {
-        public double Side { get; }
-        public double Diagonal1 { get; }
-        public double Diagonal2 { get; }
+        private double _d1;
+        private double _d2;
 
-        public Rhombus(string name, double a, double d1, double d2) : base(name)
+        public double D1
         {
-            if (a <= 0) throw new ArgumentException("Side must be positive.");
-            if (d1 <= 0) throw new ArgumentException("Diagonal1 must be positive.");
-            if (d2 <= 0) throw new ArgumentException("Diagonal2 must be positive.");
-            Side = a;
-            Diagonal1 = d1;
-            Diagonal2 = d2;
+            get => _d1;
+            set
+            {
+                ValidateD1(value);
+                _d1 = value;
+            }
         }
 
-        public override double GetArea() => (Diagonal1 * Diagonal2) / 2;
-        public override double GetPerimeter() => 4 * Side;
+        public double D2
+        {
+            get => _d2;
+            set
+            {
+                ValidateD2(value);
+                _d2 = value;
+            }
+        }
+
+        public Rhombus(string name, double a, double d1, double d2) : base(name, a)
+        {
+            D1 = d1;
+            D2 = d2;
+        }
+
+        public void ValidateD1(double value)
+        {
+            if (value <= 0) throw new ArgumentException("Diagonal1 must be positive.");
+        }
+
+        public void ValidateD2(double value)
+        {
+            if (value <= 0) throw new ArgumentException("Diagonal2 must be positive.");
+        }
+
+        public override double GetArea() => (D1 * D2) / 2;
+        public override double GetPerimeter() => 4 * A;
     }
 }

@@ -2,26 +2,28 @@
 
 namespace GeometricFigures.Backend
 {
-    public class Kite : GeometricFigure
+    public class Kite : Rhombus
     {
-        public double SideA { get; }
-        public double SideB { get; }
-        public double Diagonal1 { get; }
-        public double Diagonal2 { get; }
+        private double _b;
 
-        public Kite(string name, double a, double b, double d1, double d2) : base(name)
+        public double SideB
         {
-            if (a <= 0) throw new ArgumentException("Side A must be positive.");
-            if (b <= 0) throw new ArgumentException("Side B must be positive.");
-            if (d1 <= 0) throw new ArgumentException("Diagonal1 must be positive.");
-            if (d2 <= 0) throw new ArgumentException("Diagonal2 must be positive.");
-            SideA = a;
-            SideB = b;
-            Diagonal1 = d1;
-            Diagonal2 = d2;
+            get => _b;
+            set
+            {
+                if (value <= 0) throw new ArgumentException("Side B must be positive.");
+                _b = value;
+            }
         }
 
-        public override double GetArea() => (Diagonal1 * Diagonal2) / 2;
+        public double SideA => A; // heredado de Square (a través de Rhombus)
+
+        public Kite(string name, double a, double b, double d1, double d2) : base(name, a, d1, d2)
+        {
+            SideB = b;
+        }
+
+        public override double GetArea() => (D1 * D2) / 2; // mismo cálculo que Rhombus
         public override double GetPerimeter() => 2 * (SideA + SideB);
     }
 }

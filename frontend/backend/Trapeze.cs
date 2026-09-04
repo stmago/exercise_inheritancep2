@@ -2,29 +2,33 @@
 
 namespace GeometricFigures.Backend
 {
-    public class Trapeze : GeometricFigure
+    public class Trapeze : Triangle
     {
-        public double SideA { get; }
-        public double BaseB { get; }
-        public double SideC { get; }
-        public double BaseD { get; }
-        public double Height { get; }
+        private double _d; // base D
 
-        public Trapeze(string name, double a, double b, double c, double d, double h) : base(name)
+        public double D
         {
-            if (a <= 0) throw new ArgumentException("Side A must be positive.");
-            if (b <= 0) throw new ArgumentException("Base B must be positive.");
-            if (c <= 0) throw new ArgumentException("Side C must be positive.");
-            if (d <= 0) throw new ArgumentException("Base D must be positive.");
-            if (h <= 0) throw new ArgumentException("Height must be positive.");
-            SideA = a;
-            BaseB = b;
-            SideC = c;
-            BaseD = d;
-            Height = h;
+            get => _d;
+            set
+            {
+                ValidateD(value);
+                _d = value;
+            }
         }
 
-        public override double GetArea() => ((BaseB + BaseD) * Height) / 2;
-        public override double GetPerimeter() => SideA + BaseB + SideC + BaseD;
+        // Trapeze tiene su propia altura (la hereda de Triangle) y sus propios lados
+        public Trapeze(string name, double a, double b, double c, double d, double h)
+            : base(name, a, b, c, h) // llama a Triangle con a,b,c,h
+        {
+            D = d;
+        }
+
+        public void ValidateD(double value)
+        {
+            if (value <= 0) throw new ArgumentException("Base D must be positive.");
+        }
+
+        public override double GetArea() => ((B + D) * H) / 2; // B y H vienen de Triangle
+        public override double GetPerimeter() => A + B + C + D;
     }
 }

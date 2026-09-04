@@ -16,12 +16,16 @@ namespace GeometricFigures.Backend
 
         public override string ToString()
         {
-            // Exact format requested: "Name => Area...... 123.45678 Perimeter: 123.45678"
-            // CultureInfo en-US is used so that a comma appears as the thousands separator where appropriate.
             CultureInfo us = CultureInfo.GetCultureInfo("en-US");
-            string areaStr = GetArea().ToString("N5", us);
-            string perimStr = GetPerimeter().ToString("N5", us);
-            return $"{Name} => Area...... {areaStr} Perimiter: {perimStr}";
+
+           
+            string leftAligned = $"{Name}".PadRight(20);
+
+     
+            string areaAligned = GetArea().ToString("N5", us).PadLeft(12);
+            string perimAligned = GetPerimeter().ToString("N5", us).PadLeft(12);
+
+            return $"{leftAligned}=> Area......    {areaAligned}    Perimeter: {perimAligned}";
         }
     }
 }

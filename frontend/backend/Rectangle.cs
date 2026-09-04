@@ -2,20 +2,31 @@
 
 namespace GeometricFigures.Backend
 {
-    public class Rectangle : GeometricFigure
+    public class Rectangle : Square
     {
-        public double Width { get; }
-        public double Height { get; }
+        private double _b;
 
-        public Rectangle(string name, double a, double b) : base(name)
+        public double B
         {
-            if (a <= 0) throw new ArgumentException("Width must be positive.");
-            if (b <= 0) throw new ArgumentException("Height must be positive.");
-            Width = a;
-            Height = b;
+            get => _b;
+            set
+            {
+                ValidateB(value);
+                _b = value;
+            }
         }
 
-        public override double GetArea() => Width * Height;
-        public override double GetPerimeter() => 2 * (Width + Height);
+        public Rectangle(string name, double a, double b) : base(name, a)
+        {
+            B = b;
+        }
+
+        public void ValidateB(double value)
+        {
+            if (value <= 0) throw new ArgumentException("Side B must be positive.");
+        }
+
+        public override double GetArea() => A * B;
+        public override double GetPerimeter() => 2 * (A + B);
     }
 }

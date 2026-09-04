@@ -2,27 +2,48 @@
 
 namespace GeometricFigures.Backend
 {
-    public class Triangle : GeometricFigure
+    public class Triangle : Rectangle
     {
-        public double SideA { get; }
-        public double SideB { get; }
-        public double SideC { get; }
-        public double Height { get; }
+        private double _c;
+        private double _h;
 
-        public Triangle(string name, double a, double b, double c, double h) : base(name)
+        public double C
         {
-            if (a <= 0) throw new ArgumentException("Side A must be positive.");
-            if (b <= 0) throw new ArgumentException("Side B must be positive.");
-            if (c <= 0) throw new ArgumentException("Side C must be positive.");
-            if (h <= 0) throw new ArgumentException("Height must be positive.");
-            SideA = a;
-            SideB = b;
-            SideC = c;
-            Height = h;
+            get => _c;
+            set
+            {
+                ValidateC(value);
+                _c = value;
+            }
         }
 
-        // Usamos SideB como base (porque el programa principal pasa b como base)
-        public override double GetArea() => (SideB * Height) / 2;
-        public override double GetPerimeter() => SideA + SideB + SideC;
+        public double H
+        {
+            get => _h;
+            set
+            {
+                ValidateH(value);
+                _h = value;
+            }
+        }
+
+        public Triangle(string name, double a, double b, double c, double h) : base(name, a, b)
+        {
+            C = c;
+            H = h;
+        }
+
+        public void ValidateC(double value)
+        {
+            if (value <= 0) throw new ArgumentException("Side C must be positive.");
+        }
+
+        public void ValidateH(double value)
+        {
+            if (value <= 0) throw new ArgumentException("Height must be positive.");
+        }
+
+        public override double GetArea() => (B * H) / 2;
+        public override double GetPerimeter() => A + B + C;
     }
 }
